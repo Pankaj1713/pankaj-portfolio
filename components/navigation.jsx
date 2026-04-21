@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // New state for mobile menu
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -33,7 +33,6 @@ export function Navigation() {
     { name: "Contact", href: "#contact" },
   ];
 
-  // --- Premium Nav Animations ---
   const navContainer = {
     hidden: { opacity: 0, y: -20 },
     visible: {
@@ -56,18 +55,20 @@ export function Navigation() {
     },
   };
 
-  // --- Mobile Menu Animations ---
+  // --- Adjusted Mobile Menu Animations ---
   const mobileMenuVariants = {
     hidden: { opacity: 0, height: 0 },
     visible: {
       opacity: 1,
       height: "auto",
-      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+      // Increased duration from 0.4 to 0.7 for a smoother dropdown
+      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] },
     },
     exit: {
       opacity: 0,
       height: 0,
-      transition: { duration: 0.3, ease: "easeInOut" },
+      // Increased exit duration from 0.3 to 0.5 so it doesn't snap shut
+      transition: { duration: 0.5, ease: "easeInOut" },
     },
   };
 
@@ -82,7 +83,6 @@ export function Navigation() {
       }`}
     >
       <div className="container mx-auto px-4">
-        {/* Main Navbar Row */}
         <motion.div
           variants={navContainer}
           initial="hidden"
@@ -91,14 +91,13 @@ export function Navigation() {
             isScrolled ? "py-4" : "py-6"
           }`}
         >
-          {/* Logo */}
           <motion.a
             variants={navItem}
             href="#"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="text-2xl font-extrabold text-white tracking-tighter flex items-center"
-            onClick={() => setIsOpen(false)} // Close menu if logo is clicked
+            onClick={() => setIsOpen(false)}
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
               PT
@@ -106,7 +105,6 @@ export function Navigation() {
             <span className="text-cyan-400">.</span>
           </motion.a>
 
-          {/* Desktop Nav items */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item, index) => (
               <motion.a
@@ -121,7 +119,6 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Glowing Desktop CTA Button */}
           <motion.a
             variants={navItem}
             href="#contact"
@@ -135,7 +132,6 @@ export function Navigation() {
             Get in Touch
           </motion.a>
 
-          {/* Mobile menu toggle button */}
           <motion.div variants={navItem} className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -148,7 +144,6 @@ export function Navigation() {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                {/* Dynamically swap the SVG path between a Hamburger and an X */}
                 {isOpen ? (
                   <path
                     strokeLinecap="round"
@@ -169,7 +164,6 @@ export function Navigation() {
           </motion.div>
         </motion.div>
 
-        {/* Mobile Dropdown Menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -185,9 +179,14 @@ export function Navigation() {
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }} // Stagger the mobile links
+                    // Added a 0.2s base delay, and increased the stagger gap to 0.15s
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.2 + index * 0.15,
+                      ease: "easeOut",
+                    }}
                     href={item.href}
-                    onClick={() => setIsOpen(false)} // Close menu when a link is clicked
+                    onClick={() => setIsOpen(false)}
                     className="text-gray-300 hover:text-cyan-400 font-medium text-lg px-2"
                   >
                     {item.name}
@@ -197,7 +196,12 @@ export function Navigation() {
                 <motion.a
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navItems.length * 0.1 }}
+                  // Adjusted the delay so it appears smoothly after the last link
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.3 + navItems.length * 0.15,
+                    ease: "easeOut",
+                  }}
                   href="#contact"
                   onClick={() => setIsOpen(false)}
                   className="mt-4 px-6 py-3 text-center bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg shadow-cyan-500/20"
