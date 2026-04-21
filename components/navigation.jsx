@@ -33,6 +33,29 @@ export function Navigation() {
     { name: "Contact", href: "#contact" },
   ];
 
+  // --- THE FIX: Pure JavaScript version (No TS types) ---
+  const handleSmoothScroll = (e, href) => {
+    e.preventDefault();
+
+    // Add a small delay before closing on mobile to let scroll start
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 300);
+
+    if (href === "#" || href === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   const navContainer = {
     hidden: { opacity: 0, y: -20 },
     visible: {
@@ -55,19 +78,16 @@ export function Navigation() {
     },
   };
 
-  // --- Adjusted Mobile Menu Animations ---
   const mobileMenuVariants = {
     hidden: { opacity: 0, height: 0 },
     visible: {
       opacity: 1,
       height: "auto",
-      // Increased duration from 0.4 to 0.7 for a smoother dropdown
       transition: { duration: 1, ease: [0.16, 1, 0.3, 1] },
     },
     exit: {
       opacity: 0,
       height: 0,
-      // Increased exit duration from 0.3 to 0.5 so it doesn't snap shut
       transition: { duration: 0.5, ease: "easeInOut" },
     },
   };
@@ -91,13 +111,14 @@ export function Navigation() {
             isScrolled ? "py-4" : "py-6"
           }`}
         >
+          {/* Logo */}
           <motion.a
             variants={navItem}
             href="#"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="text-2xl font-extrabold text-white tracking-tighter flex items-center"
-            onClick={() => setIsOpen(false)}
+            onClick={(e) => handleSmoothScroll(e, "#")}
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
               PT
@@ -105,13 +126,15 @@ export function Navigation() {
             <span className="text-cyan-400">.</span>
           </motion.a>
 
+          {/* Desktop Nav Items */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item, index) => (
               <motion.a
                 key={index}
                 variants={navItem}
                 href={item.href}
-                className="relative text-gray-300 hover:text-white transition-colors font-medium text-sm py-2 group"
+                onClick={(e) => handleSmoothScroll(e, item.href)}
+                className="relative text-gray-300 hover:text-white transition-colors font-medium py-2 group cursor-pointer"
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-400 transition-all duration-300 ease-out group-hover:w-full rounded-full" />
@@ -119,19 +142,22 @@ export function Navigation() {
             ))}
           </div>
 
+          {/* Desktop CTA */}
           <motion.a
             variants={navItem}
             href="#contact"
+            onClick={(e) => handleSmoothScroll(e, "#contact")}
             whileHover={{
               y: -2,
               boxShadow: "0 10px 30px -10px rgba(34,211,238,0.5)",
             }}
             whileTap={{ scale: 0.95 }}
-            className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg transition-all duration-300"
+            className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg transition-all duration-300 cursor-pointer"
           >
             Get in Touch
           </motion.a>
 
+          {/* Mobile Menu Toggle */}
           <motion.div variants={navItem} className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -164,6 +190,7 @@ export function Navigation() {
           </motion.div>
         </motion.div>
 
+        {/* Mobile Dropdown */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -179,15 +206,14 @@ export function Navigation() {
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    // Added a 0.2s base delay, and increased the stagger gap to 0.15s
                     transition={{
                       duration: 0.5,
                       delay: 0.2 + index * 0.15,
                       ease: "easeOut",
                     }}
                     href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-gray-300 hover:text-cyan-400 font-medium text-lg px-2"
+                    onClick={(e) => handleSmoothScroll(e, item.href)}
+                    className="text-gray-300 hover:text-cyan-400 font-medium text-lg px-2 cursor-pointer"
                   >
                     {item.name}
                   </motion.a>
@@ -196,15 +222,14 @@ export function Navigation() {
                 <motion.a
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  // Adjusted the delay so it appears smoothly after the last link
                   transition={{
                     duration: 0.5,
                     delay: 0.3 + navItems.length * 0.15,
                     ease: "easeOut",
                   }}
                   href="#contact"
-                  onClick={() => setIsOpen(false)}
-                  className="mt-4 px-6 py-3 text-center bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg shadow-cyan-500/20"
+                  onClick={(e) => handleSmoothScroll(e, "#contact")}
+                  className="mt-4 px-6 py-3 text-center bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg shadow-cyan-500/20 cursor-pointer"
                 >
                   Get in Touch
                 </motion.a>

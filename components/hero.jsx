@@ -207,7 +207,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+          className="hidden md:flex absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
         >
           <div className="w-[30px] h-[50px] rounded-full border-2 border-cyan-400/30 flex justify-center pt-2 backdrop-blur-sm">
             <motion.div
