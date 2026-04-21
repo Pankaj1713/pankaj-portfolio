@@ -96,7 +96,7 @@ export function Contact() {
             onSubmit={handleSubmit}
           >
             {({ errors, touched, isSubmitting }) => (
-              <Form className="space-y-6">
+              <Form>
                 {/* Name Field */}
                 <div>
                   <label
