@@ -123,7 +123,7 @@ export function Experience() {
                     </h3>
                     <p className="text-cyan-400 font-semibold">{exp.company}</p>
                   </div>
-                  <span className="text-sm text-gray-400 bg-slate-800/80 border border-slate-700 px-3 py-1.5 rounded-full whitespace-nowrap self-start">
+                  <span className="text-sm text-gray-400 bg-slate-800/80 border border-slate-700 px-3 py-1.5 rounded-lg whitespace-nowrap self-start">
                     {exp.type}
                   </span>
                 </div>
