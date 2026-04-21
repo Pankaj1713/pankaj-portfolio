@@ -41,7 +41,7 @@ export function Hero() {
   const titleWords = portfolioData.title.split(" ");
 
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20 pb-20 overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}

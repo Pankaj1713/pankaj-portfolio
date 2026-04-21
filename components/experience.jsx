@@ -48,7 +48,7 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="py-20 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden"
+      className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden"
     >
       <div className="container mx-auto px-4">
         {/* Section Title - Triggers once when the section top hits the viewport */}

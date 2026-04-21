@@ -61,7 +61,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden"
+      className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden"
     >
       <div className="container mx-auto px-4">
         {/* Section Title */}

@@ -11,7 +11,7 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="py-20 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
+      className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
     >
       <div className="container mx-auto px-4">
         {/* Section Title */}
@@ -52,7 +52,7 @@ export function Projects() {
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Badge */}
                   <div>
-                    <span className="inline-block text-sm font-semibold text-cyan-400 bg-cyan-400/10 px-3 py-1 rounded-full mb-4">
+                    <span className="inline-block text-sm font-medium text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-4 py-2 rounded-lg mb-4 leading-snug shadow-sm">
                       {project.highlights}
                     </span>
                   </div>

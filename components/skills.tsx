@@ -12,7 +12,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="py-20 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
+      className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
       ref={ref}
     >
       <div className="container mx-auto px-4">
