@@ -1,6 +1,6 @@
 export const portfolioData = {
   name: "Pankaj Thakur",
-  title: "Frontend Engineer & Full-Stack Developer",
+  title: "Frontend Developer",
   email: "pankajthakur1713@gmail.com",
   phone: "+91 8708583401",
   location: "India",
@@ -14,7 +14,7 @@ export const portfolioData = {
     },
     {
       name: "GitHub",
-      url: "https://github.com",
+      url: "https://github.com/Pankaj1713",
       icon: "Github",
     },
     {

@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
-, "components/experience.jsx", "components/hero.jsx", "components/projects.tsx", "components/navigation.jsx"  ],
+, "components/experience.jsx", "components/hero.jsx", "components/projects.jsx", "components/navigation.jsx", "components/skills.jsx"  ],
   "exclude": [
     "node_modules"
   ]

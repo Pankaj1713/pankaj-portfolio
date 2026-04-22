@@ -253,12 +253,15 @@ export function Contact() {
           </motion.a>
 
           {/* Social */}
-          <motion.div
+          <motion.a
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
             whileHover={{ scale: 1.05, y: -5 }}
+            href="https://www.linkedin.com/in/pankzthakur"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative"
           >
             <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 text-center hover:border-cyan-400/50 transition-all h-full">
@@ -268,7 +271,7 @@ export function Contact() {
               <h3 className="text-white font-semibold text-sm">Connect</h3>
               <p className="text-gray-400 text-xs mt-1">LinkedIn & GitHub</p>
             </div>
-          </motion.div>
+          </motion.a>
         </div>
 
         {/* Social Links */}
