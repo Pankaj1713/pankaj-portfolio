@@ -168,7 +168,7 @@ export function Experience() {
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="absolute left-[16px] md:left-[calc(33.333%-5px)] top-2 w-[10px] h-[10px] rounded-full bg-slate-950 border-2 border-cyan-400 z-10 group-hover:bg-cyan-400 group-hover:shadow-[0_0_20px_rgba(34,211,238,1)] transition-all duration-300"
+                  className="absolute left-[16px] md:left-[calc(33.4%-5px)] top-2 w-[10px] h-[10px] rounded-full bg-slate-950 border-2 border-cyan-400 z-10 group-hover:bg-cyan-400 group-hover:shadow-[0_0_20px_rgba(34,211,238,1)] transition-all duration-300"
                 />
 
                 {/* Left Side: Sticky Date & Company (Desktop only) */}
