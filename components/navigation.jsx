@@ -302,7 +302,7 @@ export function Navigation() {
               animate={{ opacity: 1, clipPath: "circle(150% at 90% 10%)" }}
               exit={{ opacity: 0, clipPath: "circle(0% at 90% 10%)" }}
               transition={{ type: "spring", stiffness: 40, damping: 15 }}
-              className="md:hidden absolute top-full left-0 w-full bg-slate-950/90 backdrop-blur-2xl border-b border-white/10 shadow-2xl shadow-black/50"
+              className="md:hidden absolute top-full left-0 w-full bg-slate-950/90 backdrop-blur-2xl shadow-2xl shadow-black/50"
             >
               <div className="flex flex-col gap-2 p-6">
                 {navItems.map((item, index) => (
