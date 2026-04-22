@@ -85,13 +85,13 @@ export function Projects() {
       className="relative w-full bg-[#020617] overflow-hidden"
     >
       {/* 🔥 Disable 3D on mobile */}
-      {!isMobile && (
+      {/* {!isMobile && ( */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Canvas camera={{ position: [0, 0, 3], fov: 60 }}>
             <ParticleNetwork />
           </Canvas>
         </div>
-      )}
+      {/* )} */}
 
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         {/* HEADER */}
