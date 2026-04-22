@@ -267,7 +267,7 @@ export function Contact() {
                 <Linkedin className="text-cyan-400" size={24} />
               </div>
               <h3 className="text-white font-semibold text-sm">Connect</h3>
-              <p className="text-gray-400 text-xs mt-1">LinkedIn & GitHub</p>
+              <p className="text-gray-400 text-xs mt-1">LinkedIn</p>
             </div>
           </motion.a>
         </div>
