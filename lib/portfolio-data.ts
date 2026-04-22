@@ -151,14 +151,6 @@ export const portfolioData = {
         { name: "Material UI", proficiency: 85 },
       ],
     },
-    {
-      category: "Backend & Deployment",
-      items: [
-        { name: "Node.js", proficiency: 80 },
-        { name: "AWS", proficiency: 75 },
-        { name: "PM2", proficiency: 80 },
-      ],
-    },
   ],
 
   education: [

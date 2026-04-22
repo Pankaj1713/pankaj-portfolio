@@ -175,7 +175,7 @@ export function Skills() {
         </motion.div>
 
         {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto mb-24">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 mb-24">
           {portfolioData.skills.map((skillGroup, groupIndex) => (
             <motion.div
               key={groupIndex}
