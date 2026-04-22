@@ -42,7 +42,7 @@ export const portfolioData = {
       id: 2,
       company: "Dev Story",
       position: "Senior Frontend Developer",
-      duration: "Jan 2025 - Present",
+      duration: "Jan 2025 - Feb 2026",
       type: "Full-time",
       description: "Developing innovative features for developer community platform.",
       highlights: [
