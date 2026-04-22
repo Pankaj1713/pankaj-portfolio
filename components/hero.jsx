@@ -8,86 +8,81 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 // --- 1. THE 3D SHADER BACKGROUND ---
+// --- 1. THE 3D STARFIELD BACKGROUND ---
 const HeroShaderBackground = () => {
-  const materialRef = useRef(null);
+  const pointsRef = useRef(null);
 
-  const material = useMemo(
-    () =>
-      new THREE.ShaderMaterial({
-        uniforms: {
-          uTime: { value: 0 },
-          uColor1: { value: new THREE.Color("#020617") }, // Deep slate background
-          uColor2: { value: new THREE.Color("#06b6d4") }, // Cyan glow
-          uColor3: { value: new THREE.Color("#3b82f6") }, // Blue glow
-        },
-        vertexShader: `
-          varying vec2 vUv;
-          void main() {
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-          }
-        `,
-        fragmentShader: `
-          uniform float uTime;
-          uniform vec3 uColor1;
-          uniform vec3 uColor2;
-          uniform vec3 uColor3;
-          varying vec2 vUv;
+  // Generate 1500 stars only once for performance
+  const [positions, colors] = useMemo(() => {
+    const starCount = 1500;
+    const pos = new Float32Array(starCount * 3);
+    const col = new Float32Array(starCount * 3);
 
-          // Smooth Perlin 2D Noise
-          vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-          vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-          vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
-          float snoise(vec2 v) {
-            const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
-            vec2 i  = floor(v + dot(v, C.yy) );
-            vec2 x0 = v -   i + dot(i, C.xx);
-            vec2 i1; i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-            vec4 x12 = x0.xyxy + C.xxzz;
-            x12.xy -= i1;
-            i = mod289(i);
-            vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 )) + i.x + vec3(0.0, i1.x, 1.0 ));
-            vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
-            m = m*m ; m = m*m ;
-            vec3 x = 2.0 * fract(p * C.www) - 1.0;
-            vec3 h = abs(x) - 0.5; vec3 ox = floor(x + 0.5);
-            vec3 a0 = x - ox; m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
-            vec3 g; g.x  = a0.x  * x0.x  + h.x  * x0.y; g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-            return 130.0 * dot(m, g);
-          }
+    const color1 = new THREE.Color("#06b6d4"); // Cyan
+    const color2 = new THREE.Color("#3b82f6"); // Blue
+    const color3 = new THREE.Color("#ffffff"); // Bright White for contrast
 
-          void main() {
-            // Create a slow, flowing liquid effect
-            vec2 pos = vec2(vUv.x * 2.5, vUv.y * 2.0);
-            float noise = snoise(pos + uTime * 0.15);
-            
-            // Blend colors organically
-            vec3 mixedColor = mix(uColor1, uColor2, smoothstep(0.1, 0.9, noise));
-            vec3 finalColor = mix(mixedColor, uColor3, smoothstep(0.4, 1.0, noise));
-            
-            // Soft vignette so it fades into darkness at the edges
-            float vignette = smoothstep(1.2, 0.1, distance(vUv, vec2(0.5)));
-            
-            gl_FragColor = vec4(finalColor, vignette * 0.6); // 0.6 keeps the shader subtle behind the text
-          }
-        `,
-        transparent: true,
-        depthWrite: false,
-      }),
-    [],
-  );
+    for (let i = 0; i < starCount; i++) {
+      // Distribute stars randomly in a massive 3D sphere around the camera
+      const radius = 10 + Math.random() * 10; // Stars stay somewhat far away
+      const theta = Math.random() * 2 * Math.PI;
+      const phi = Math.acos(Math.random() * 2 - 1);
 
-  useFrame((state) => {
-    if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+      pos[i * 3] = radius * Math.sin(phi) * Math.cos(theta); // x
+      pos[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta); // y
+      pos[i * 3 + 2] = radius * Math.cos(phi); // z
+
+      // Randomly assign colors to the stars based on probability
+      const randomColor = Math.random();
+      let chosenColor = color1;
+
+      if (randomColor > 0.6) chosenColor = color2;
+      if (randomColor > 0.9) chosenColor = color3; // Only 10% of stars are white
+
+      col[i * 3] = chosenColor.r;
+      col[i * 3 + 1] = chosenColor.g;
+      col[i * 3 + 2] = chosenColor.b;
+    }
+    return [pos, col];
+  }, []);
+
+  useFrame((state, delta) => {
+    if (pointsRef.current) {
+      // Slowly rotate the entire galaxy
+      pointsRef.current.rotation.y += delta * 0.05;
+      pointsRef.current.rotation.x += delta * 0.02;
     }
   });
 
   return (
-    <mesh>
-      <planeGeometry args={[25, 25]} />
-      <primitive object={material} ref={materialRef} attach="material" />
-    </mesh>
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={positions.length / 3}
+          array={positions}
+          itemSize={3}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          count={colors.length / 3}
+          array={colors}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      {/* We use additive blending so the stars glow brightly 
+        against your dark #020617 background 
+      */}
+      <pointsMaterial
+        size={0.05}
+        vertexColors
+        transparent
+        opacity={0.8}
+        sizeAttenuation={true}
+        blending={THREE.AdditiveBlending}
+        depthWrite={false}
+      />
+    </points>
   );
 };
 
@@ -279,7 +274,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* The Sleek Scroll Indicator */}
       {/* The Sleek Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
