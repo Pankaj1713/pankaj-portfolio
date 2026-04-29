@@ -123,8 +123,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-html,
-body {
-  cursor: none;
-}
