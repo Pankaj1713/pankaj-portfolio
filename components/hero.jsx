@@ -239,7 +239,7 @@ export function Hero() {
               {/* The Image Wrapper */}
               <div className="w-full h-full rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-cyan-900/40 relative group">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+                  src="/profile.png"
                   alt="Pankaj Thakur"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
