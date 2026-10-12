@@ -8,13 +8,13 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'Pankaj Thakur - Frontend Developer',
-  description: 'SDE-2 Frontend Developer | React | Next.js | 3+ Years Experience | Florasense (Shark Tank)',
+  description: 'SDE-2 Frontend Developer | React | Next.js | 4+ Years Experience | Florasense (Shark Tank)',
   generator: 'v0.app',
   keywords: 'frontend developer, react, next.js, web development, portfolio',
   authors: [{ name: 'Pankaj Thakur' }],
   openGraph: {
     title: 'Pankaj Thakur - Frontend Developer',
-    description: 'SDE-2 Frontend Developer with 3+ years of experience',
+    description: 'SDE-2 Frontend Developer with 4+ years of experience',
     type: 'website',
   },
   icons: {
@@ -44,6 +44,9 @@ export default function RootLayout({
   return (
     <html lang="en" className=" scroll-smooth">
       <body className="antialiased ">
+        <noscript>
+          <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
+        </noscript>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

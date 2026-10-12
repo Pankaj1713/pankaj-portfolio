@@ -123,3 +123,109 @@
     @apply bg-background text-foreground;
   }
 }
+
+html {
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 3px;
+}
+
+@keyframes gradient-flow {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.gradient-text-flow {
+  background-image: linear-gradient(110deg, #22d3ee, #60a5fa, #a78bfa, #22d3ee);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-flow 8s linear infinite;
+}
+
+.cta-gradient {
+  background-image: linear-gradient(90deg, #06b6d4, #3b82f6, #06b6d4);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  transition: background-position 0.6s ease, box-shadow 0.3s ease;
+}
+
+.cta-gradient:hover {
+  background-position: 100% 0%;
+}
+
+.cta-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.cta-sheen:hover::after,
+.cta-sheen:focus-visible::after {
+  transform: translateX(120%);
+}
+
+.spotlight-glow {
+  background: radial-gradient(
+    420px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(34, 211, 238, 0.12),
+    transparent 70%
+  );
+}
+
+.spotlight-border {
+  padding: 1px;
+  background: radial-gradient(
+    260px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(34, 211, 238, 0.7),
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+.css-starfield {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 38% 72%, rgba(103, 232, 249, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 64% 30%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 82% 62%, rgba(96, 165, 250, 0.9), transparent),
+    radial-gradient(1px 1px at 91% 12%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 24% 88%, rgba(103, 232, 249, 0.7), transparent);
+  background-size: 420px 420px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .gradient-text-flow {
+    animation: none;
+  }
+
+  .cta-sheen::after,
+  .cta-gradient {
+    transition: none;
+  }
+}

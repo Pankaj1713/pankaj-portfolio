@@ -6,7 +6,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-800/50 py-8">
+    <footer className="border-t border-slate-800/50 py-8">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -33,7 +33,7 @@ export function Footer() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="text-gray-400 hover:text-cyan-400 transition-colors"
+              className="text-gray-400 hover:text-cyan-400 hover:-translate-y-0.5 transition-all"
             >
               <svg
                 className="w-5 h-5"

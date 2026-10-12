@@ -4,7 +4,7 @@ export const portfolioData = {
   email: "pankajthakur1713@gmail.com",
   phone: "+91 8708583401",
   location: "India",
-  bio: "SDE-2 Frontend Developer with 3+ years of experience building high-performance web applications. Passionate about creating intuitive user interfaces and shipping products that delight users.",
+  bio: "SDE-2 Frontend Developer with 4+ years of experience building high-performance web applications. Passionate about creating intuitive user interfaces and shipping products that delight users.",
   
   socialLinks: [
     {
@@ -61,6 +61,7 @@ export const portfolioData = {
       highlights: [
         "Built 5+ production applications",
         "Implemented complex state management with Redux",
+        "Developed backend services and REST APIs with Node.js",
         "Worked with teams on Florasense (Shark Tank featured startup)",
       ],
     },
@@ -140,6 +141,13 @@ export const portfolioData = {
         { name: "JavaScript", proficiency: 95 },
         { name: "TypeScript", proficiency: 85 },
         { name: "HTML/CSS", proficiency: 90 },
+      ],
+    },
+    {
+      category: "Backend",
+      items: [
+        { name: "Node.js", proficiency: 80 },
+        { name: "Express.js", proficiency: 80 },
       ],
     },
     {
